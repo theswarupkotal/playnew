@@ -1,4 +1,3 @@
-// src/pages/Dashboard.tsx
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Search, Film, LogOut } from 'lucide-react';
@@ -36,9 +35,9 @@ export default function Dashboard() {
   // when you click a grid tile
   const handleVideoClick = (id: string, isYT = false) => {
     if (isYT) {
-      navigate(`/watch/${id}`);
+      navigate(`/watch?youtube=${id}`);
     } else {
-      navigate(`/watch/${id}`);
+      navigate(`/watch?play=${id}`);
     }
   };
 
@@ -82,23 +81,7 @@ export default function Dashboard() {
     </header>
   );
 
-  // If ?play or ?youtube is set, show the VideoPlayer
-  if (playId || youtubeId) {
-    // auth guard
-    if (loadingMeta) return <LoadingScreen />;
-    if (metaError)  return <ErrorScreen message={metaError} />;
-
-    return (
-      <div className="min-h-screen bg-gray-900 text-white">
-        {HeaderBar}
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <VideoPlayer metadata={metadata!} youtubeId={youtubeId} />
-        </main>
-      </div>
-    );
-  }
-
-  // Otherwise, show the dashboard grid
+  // Grid view
   return (
     <div className="min-h-screen bg-gray-900 text-white">
       {HeaderBar}
@@ -142,24 +125,14 @@ export default function Dashboard() {
                   <div
                     key={v.id}
                     onClick={() => handleVideoClick(v.id, true)}
-                    className="cursor-pointer"
+                    className="cursor-pointer group"
                   >
                     <div className="relative aspect-video rounded-lg overflow-hidden mb-2 bg-gray-800">
-                      {v.thumbnail ? (
-                        <img
-                          src={v.thumbnail}
-                          alt={v.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition duration-200"
-                        />
-                      ) : (
-                        <video
-                          src={v.streamUrl}
-                          className="w-full h-full object-cover group-hover:scale-105 transition duration-200"
-                          muted
-                          preload="metadata"
-                          autoPlay
-                        />
-                      )}
+                      <img
+                        src={v.thumbnail}
+                        alt={v.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition duration-200"
+                      />
                     </div>
                     <h3 className="text-white font-medium line-clamp-2 group-hover:text-purple-400">
                       {v.title}
@@ -188,13 +161,9 @@ export default function Dashboard() {
                         className="w-full h-full object-cover group-hover:scale-105 transition duration-200"
                       />
                     ) : (
-                      <video
-                        src={v.streamUrl}
-                        className="w-full h-full object-cover group-hover:scale-105 transition duration-200"
-                        muted
-                        preload="metadata"
-                        autoPlay
-                      />
+                      <div className="w-full h-full flex items-center justify-center">
+                        <Film className="w-12 h-12 text-gray-600" />
+                      </div>
                     )}
                   </div>
                   <h3 className="text-white font-medium line-clamp-2 group-hover:text-purple-400">

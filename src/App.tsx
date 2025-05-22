@@ -1,4 +1,3 @@
-//swarupplay/src/App.tsx
 import React, { useEffect, useState } from 'react';
 import { Header } from './components/Header';
 import { LoadingScreen } from './components/LoadingScreen';
@@ -8,7 +7,7 @@ import { VideoPlayer } from './components/VideoPlayer';
 import { YouTubeSuggestions } from './components/YouTubeSuggestions';
 import { useVideoMetadata } from './hooks/useVideoMetadata';
 import { useRelatedVideos } from './hooks/useRelatedVideos';
-import { useYouTubeVideos } from './hooks/useYouTubeVideos';
+import { useYouTubeVideos } from './hooks/useYoutubeVideos';
 import { VideoMetadata } from './types';
 import { formatFileSize, formatDuration } from './utils/format';
 import { Routes, Route, Navigate } from 'react-router-dom';
