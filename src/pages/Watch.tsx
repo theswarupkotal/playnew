@@ -5,7 +5,7 @@ import { VideoMetadata, PlayerState, RelatedVideo } from '../types';
 import { useVideoMetadata } from '../hooks/useVideoMetadata';
 import { useRelatedVideos } from '../hooks/useRelatedVideos';
 import { useVideoPlayer } from '../hooks/useVideoPlayer';
-import { useYouTubeVideos } from '../hooks/useYouTubeVideos';
+import { useYouTubeVideos } from '../hooks/useYoutubeVideos';
 import { formatFileSize, formatDuration } from '../utils/format';
 
 interface HeaderProps {
